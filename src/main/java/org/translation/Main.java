@@ -1,5 +1,6 @@
 package org.translation;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,6 +13,7 @@ import java.util.Scanner;
  * - output the translation<br/>
  * - at any time, the user can type quit to quit the program<br/>
  */
+
 public class Main {
 
     /**
@@ -19,6 +21,7 @@ public class Main {
      * A class implementing the Translator interface is created and passed into a call to runProgram.
      * @param args not used by the program
      */
+
     public static void main(String[] args) {
 
         // TODO Task: once you finish the JSONTranslator,
@@ -36,6 +39,7 @@ public class Main {
      * See the class Javadoc for a summary of what the program will do.
      * @param translator the Translator implementation to use in the program
      */
+
     public static void runProgram(Translator translator) {
         while (true) {
             String country = promptForCountry(translator);
@@ -88,11 +92,25 @@ public class Main {
 
         // TODO Task: replace the line below so that we sort the languages alphabetically and print them out; one per line
         // TODO Task: convert the language codes to the actual language names before sorting
-        System.out.println(translator.getCountryLanguages(country));
+        List<String> sortedlanguage = translator.getCountryLanguages(country);
+        sortedlanguage.sort(Comparator.naturalOrder());
+        System.out.println(sortedlanguage);
 
         System.out.println("select a language from above:");
 
         Scanner s = new Scanner(System.in);
         return s.nextLine();
     }
+
+    /**
+     * Fake java doc.
+     */
+    class LanguageComparator implements Comparator<String> {
+
+        @Override
+        public int compare(String o1, String o2) {
+            return o1.compareTo(o2);
+        }
+    }
 }
+
